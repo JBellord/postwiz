@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { LinkIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,11 +13,13 @@ export default function Home() {
       <span className="text-gray-500">Write better social media posts.</span>
       <div className="flex justify-around space-x-4 mt-2 items-center">
         {" "}
-        <Button className="mt-6 hover:bg-rose-600" variant="outline" size="lg">
+        <Button className="mt-6 hover:bg-rose-300" variant="outline" size="lg">
           Get Started
         </Button>{" "}
-        <Button className="mt-6" size="lg">
-          Sign in
+        <Button className="mt-6" size="lg" asChild>
+          <Link href={"/editor"}>
+            <LinkIcon className="mr-2 h-4 w-4" /> Editor
+          </Link>
         </Button>
       </div>
     </main>
