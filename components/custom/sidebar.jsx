@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Bell, HelpCircle, Settings } from "lucide-react";
 
-function SidebarItem({ icon, name }) {
+function SidebarItem({ icon, link, name }) {
   return (
     <Link
-      href="/"
+      href={link}
       className="group w-full pl-6 py-3 flex justify-start items-center space-x-2 hover:transition-all hover:scale-102 hover:bg-rose-100/10 hover:rounded-3xl hover:cursor-pointer"
     >
       {icon}
@@ -34,14 +34,17 @@ function EditorSidebar() {
         <SidebarItem
           icon={<Bell className="h-5 w-5 group-hover:stroke-rose-500" />}
           name={"Notification"}
+          link={"/editor/settings"}
         />
         <SidebarItem
           icon={<HelpCircle className="h-5 w-5 group-hover:stroke-rose-500" />}
           name={"Help"}
+          link={"/editor/settings"}
         />
         <SidebarItem
           icon={<Settings className="h-5 w-5 group-hover:stroke-rose-500" />}
           name={"Settings"}
+          link={"/editor/settings"}
         />
       </div>
     </div>
