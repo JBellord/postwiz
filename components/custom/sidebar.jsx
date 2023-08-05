@@ -31,7 +31,7 @@ function EditorSidebar() {
         </div>
       </div>
       <Tabs defaultValue="drafts" className="w-64 h-[60%]">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-2 bg-slate-800">
           <TabsTrigger value="drafts">Drafts</TabsTrigger>
           <TabsTrigger value="posted">Posted</TabsTrigger>
         </TabsList>
