@@ -10,7 +10,7 @@ function SidebarItem({ icon, link, name }) {
       className="group w-full pl-6 py-3 flex justify-start items-center space-x-2 hover:transition-all hover:scale-102 hover:bg-rose-100/10 hover:rounded-3xl hover:cursor-pointer"
     >
       {icon}
-      <span className="text-sm font-semibold group-hover:text-rose-500">
+      <span className="text-sm font-medium group-hover:text-rose-500">
         {name}
       </span>
     </Link>
