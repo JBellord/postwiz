@@ -6,7 +6,7 @@ function EditorLayout({ children }) {
       <aside className="w-72 bg-slate-950 text-white px-1 py-4">
         <EditorSidebar />
       </aside>
-      <main className=" flex w-full flex-1 p-4">{children}</main>
+      <main className=" flex w-full flex-1 p-0">{children}</main>
     </div>
   );
 }
