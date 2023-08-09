@@ -42,7 +42,7 @@ function TabItem() {
 function TabItems() {
   return (
     <ScrollArea className="h-full w-full p-1 grid gap-1 overflow-y-auto overflow-x-hidden">
-      <TabItem />
+      <Separator className="opacity-10 rounded-3xl" /> <TabItem />
       <TabItem />
       <TabItem />
       <TabItem />

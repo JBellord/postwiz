@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Bell, Linkedin, Twitter, Users } from "lucide-react";
+import { Bell, Instagram, Linkedin, Twitter, Users } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -46,6 +46,13 @@ function EditorHeader() {
                 </Label>
                 <Switch id="linkedin" />
               </div>
+              <div className="w-full flex justify-between items-center">
+                <Label htmlFor="instagram" className="flex items-center">
+                  <Instagram className="mr-2 h-5 w-5" />
+                  Instagram
+                </Label>
+                <Switch id="instagram" />
+              </div>
             </div>
           </SheetContent>
         </Sheet>
@@ -56,8 +63,8 @@ function EditorHeader() {
         </Button>
         <Button
           size="sm"
-          variant="destructive"
-          className="bg-rose-500 px-6 hover:bg-red-600 hover:outline-2"
+          variant="outline"
+          className="py-1 text-sm font-medium bg-red-400 hover:text-white px-5 hover:bg-red-600 "
         >
           Logout
         </Button>
