@@ -43,7 +43,7 @@ function EditorSidebar() {
           <TabItems />
         </TabsContent>
         <TabsContent className="bg-slate-950 rounded-2xl" value="posted">
-          Posted 1
+          <TabItems />
         </TabsContent>
       </Tabs>
       <div className="w-full absolute bottom-0  grid items-start gap-2">

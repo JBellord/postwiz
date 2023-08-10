@@ -13,7 +13,7 @@ function Pill({ name, icon, color }) {
       {icon}
       <span>{name}</span>
       <Button
-        className="transition-all ease-in-out ml-0 h-4 w-0 p-0 group-hover:delay-100 group-hover:ml-2 group-hover:w-4"
+        className="transition-all ease-in-out ml-0 h-4 w-0 p-0 group-hover:delay-150 group-hover:ml-2 group-hover:w-4"
         size="icon"
         variant="ghost"
       >
@@ -67,7 +67,11 @@ function EditorBody() {
             placeholder="Write your tweets!"
           />
           <div className="w-full mt-2 p-2 flex justify-end items-center space-x-2">
-            <Button size="sm" className="px-5" variant="outline">
+            <Button
+              size="sm"
+              className="px-5 hover:bg-rose-400"
+              variant="outline"
+            >
               Save Draft
             </Button>
             <Button type="submit" className="px-6" size="sm">
