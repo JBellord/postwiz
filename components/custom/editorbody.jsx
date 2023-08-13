@@ -4,6 +4,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
 import { Instagram, Linkedin, Twitter, X } from "lucide-react";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import MainEditor from "./maineditor";
 
 function Pill({ name, icon, color }) {
   return (
@@ -24,6 +26,8 @@ function Pill({ name, icon, color }) {
 }
 
 function EditorBody() {
+  const [value, setValue] = useState("");
+
   return (
     // shadow-md rounded-t-3xl border
     <div className="absolute bottom-0 w-[65%] h-[100%] py-3 px-5">
@@ -60,25 +64,26 @@ function EditorBody() {
           />
         </div>
       </div>
-      <div className="py-0 px-8">
-        <form>
-          <Textarea
-            className="rounded-3xl p-4 border-0"
-            placeholder="Write your tweets!"
-          />
-          <div className="w-full mt-2 p-2 flex justify-end items-center space-x-2">
-            <Button
-              size="sm"
-              className="px-5 hover:bg-rose-400"
-              variant="outline"
-            >
-              Save Draft
-            </Button>
-            <Button type="submit" className="px-6" size="sm">
-              Post
-            </Button>
-          </div>
-        </form>
+      <div className="relative py-0 px-8">
+        <MainEditor />
+        <div className="w-full mt-2 p-2 flex justify-end items-center space-x-2">
+          <Button
+            size="sm"
+            className="px-5 hover:bg-rose-400"
+            variant="outline"
+          >
+            Save Draft
+          </Button>
+          <Button
+            onClick={() => {
+              console.log(value);
+            }}
+            className="px-6"
+            size="sm"
+          >
+            Post
+          </Button>
+        </div>
       </div>
     </div>
   );
