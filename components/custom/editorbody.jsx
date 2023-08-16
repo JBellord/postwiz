@@ -30,7 +30,7 @@ function EditorBody() {
 
   return (
     // shadow-md rounded-t-3xl border
-    <div className="absolute bottom-0 w-[65%] h-[100%] py-3 px-5">
+    <div className="absolute bottom-0 w-[65%] h-[95%] py-3 px-5">
       <div className="relative h-20 flex justify-between items-center space-x-3 p-4">
         <div className="flex justify-start space-x-3 p-2 items-center">
           <Avatar className="h-12 w-12">

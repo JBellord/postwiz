@@ -1,71 +1,89 @@
 "use client";
 
-import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $getRoot, $getSelection } from "lexical";
-import { BeautifulMentionsPlugin } from "lexical-beautiful-mentions";
-import { forwardRef } from "react";
+import Editor from "@draft-js-plugins/editor";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { EditorState } from "draft-js";
+import createMentionPlugin, {
+  defaultSuggestionsFilter,
+} from "@draft-js-plugins/mention";
+import mentions from "./mentions";
+import mentionStyle from "./Mention.module.css";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-const theme = {};
-
-const onError = (error) => {
-  console.error(error);
-};
-
-function onChange(state) {
-  state.read(() => {
-    const root = $getRoot();
-    console.log(root.getTextContent());
-  });
+function Entry(props) {
+  const { mention, theme, searchValue, isFocused, ...parentProps } = props;
+  return (
+    <div {...parentProps}>
+      <div
+        className={`w-64 py-2 px-3 my-1 flex justify-items-start items-center rounded-3xl ${
+          isFocused ? "bg-slate-100" : "bg-white"
+        }`}
+      >
+        <div className="w-12">
+          <Avatar className="w-9 h-9">
+            <AvatarFallback>KD</AvatarFallback>
+            <AvatarImage src={mention.avatar} />
+          </Avatar>
+        </div>
+        <div className="flex w-full flex-1 flex-col justify-start">
+          <span className="text-sm font-semibold">{mention.name}</span>
+          <span className="text-xs font-normal text-slate-600">
+            {mention.link}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function MainEditor() {
-  const initialConfig = {
-    namespace: "MyEditor",
-    theme,
-    onError,
-  };
+  const [editorState, setEditorState] = useState();
 
-  const mentionItems = {
-    "@": ["Ali", "Akbar", "Christina"],
-    "#": ["jim", "buildspace"],
-  };
+  useEffect(() => {
+    setEditorState(EditorState.createEmpty());
+  }, []);
 
-  const CustomMenu = forwardRef(({ open, loading, ...props }, ref) => (
-    <ul className="m-0 mt-6" {...props} ref={ref} />
-  ));
+  const [open, setOpen] = useState(false);
+  const [suggestions, setSuggestions] = useState(mentions);
 
-  const CustomMenuItem = forwardRef(
-    ({ selected, label, itemValue, ...props }, ref) => (
-      <li
-        className={`m-0 flex ... ${
-          selected ? "bg-gray-100 ..." : "bg-white ..."
-        }`}
-        {...props}
-        ref={ref}
-      />
-    )
-  );
+  const { MentionSuggestions, plugins } = useMemo(() => {
+    const mentionPlugin = createMentionPlugin({
+      mentionPrefix: "@",
+      theme: mentionStyle,
+    });
+    const { MentionSuggestions } = mentionPlugin;
+    const plugins = [mentionPlugin];
+    return { plugins, MentionSuggestions };
+  }, []);
+
+  const onOpenChange = useCallback((_open) => {
+    setOpen(_open);
+  }, []);
+
+  const onSearchChange = useCallback(({ value }) => {
+    setSuggestions(defaultSuggestionsFilter(value, mentions));
+  }, []);
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <PlainTextPlugin
-        contentEditable={
-          <ContentEditable className="relative min-h-in h-24 p-3 rounded-2xl w-full" />
-        }
-        placeholder={<div className="absolute top-3 left-11">Hello...</div>}
-      />
-      <HistoryPlugin />
-      <BeautifulMentionsPlugin
-        menuComponent={CustomMenu}
-        menuItemComponent={CustomMenuItem}
-        items={mentionItems}
-      />
-      <OnChangePlugin onChange={onChange} />
-    </LexicalComposer>
+    <div>
+      {editorState && (
+        <div>
+          <Editor
+            editorState={editorState}
+            onChange={setEditorState}
+            plugins={plugins}
+          ></Editor>
+          <MentionSuggestions
+            open={open}
+            onOpenChange={onOpenChange}
+            suggestions={suggestions}
+            onSearchChange={onSearchChange}
+            entryComponent={Entry}
+            popoverContainer={({ children }) => <div>{children}</div>}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 

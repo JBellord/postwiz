@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@draft-js-plugins/editor": "^4.1.4",
+    "@draft-js-plugins/mention": "^5.2.2",
     "@hookform/resolvers": "^3.2.0",
     "@lexical/react": "^0.12.0",
     "@radix-ui/react-avatar": "^1.0.3",
@@ -25,6 +27,7 @@
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "draft-js": "^0.11.7",
     "lexical": "^0.12.0",
     "lexical-beautiful-mentions": "^0.1.13",
     "lucide-react": "^0.263.1",
