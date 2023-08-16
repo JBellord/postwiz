@@ -31,6 +31,17 @@ const mentions = [
     avatar:
       "https://pbs.twimg.com/profile_images/688487813025640448/E6O6I011_400x400.png",
   },
+  {
+    name: "shadcn",
+    link: "https://twitter.com/shadcn",
+    avatar: "https://github.com/shadcn.png",
+  },
+  {
+    name: "next.js",
+    link: "https://twitter.com/nextjs",
+    avatar:
+      "https://pbs.twimg.com/profile_images/1565710214019444737/if82cpbS_400x400.jpg",
+  },
 ];
 
 export default mentions;

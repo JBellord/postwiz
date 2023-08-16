@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@draft-js-plugins/editor": "^4.1.4",
+    "@draft-js-plugins/hashtag": "^4.2.2",
     "@draft-js-plugins/mention": "^5.2.2",
     "@hookform/resolvers": "^3.2.0",
     "@radix-ui/react-avatar": "^1.0.3",

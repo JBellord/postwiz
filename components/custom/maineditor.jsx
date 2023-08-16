@@ -6,6 +6,7 @@ import { EditorState } from "draft-js";
 import createMentionPlugin, {
   defaultSuggestionsFilter,
 } from "@draft-js-plugins/mention";
+import createHashtagPlugin from "@draft-js-plugins/hashtag";
 import mentions from "./mentions";
 import mentionStyle from "./Mention.module.css";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -15,7 +16,7 @@ function Entry(props) {
   return (
     <div {...parentProps}>
       <div
-        className={`w-64 py-2 px-3 my-1 flex justify-items-start items-center rounded-3xl ${
+        className={`w-64 py-2 px-3 my-1 flex justify-items-start space-x-2 items-center rounded-3xl ${
           isFocused ? "bg-slate-100" : "bg-white"
         }`}
       >
@@ -47,12 +48,13 @@ function MainEditor() {
   const [suggestions, setSuggestions] = useState(mentions);
 
   const { MentionSuggestions, plugins } = useMemo(() => {
+    const hashtagPlugin = createHashtagPlugin({ theme: mentionStyle });
     const mentionPlugin = createMentionPlugin({
       mentionPrefix: "@",
       theme: mentionStyle,
     });
     const { MentionSuggestions } = mentionPlugin;
-    const plugins = [mentionPlugin];
+    const plugins = [mentionPlugin, hashtagPlugin];
     return { plugins, MentionSuggestions };
   }, []);
 
@@ -72,7 +74,7 @@ function MainEditor() {
             editorState={editorState}
             onChange={setEditorState}
             plugins={plugins}
-          ></Editor>
+          />
           <MentionSuggestions
             open={open}
             onOpenChange={onOpenChange}
